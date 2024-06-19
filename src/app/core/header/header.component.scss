@@ -1,0 +1,78 @@
+.mat-toolbar {
+    background-color: rgb(210, 169, 64);
+    color: rgb(0, 0, 0);
+  }
+  
+  .header_container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      align-items: center;
+      .header_title {
+           color: black;
+           font-weight: bold;
+           display: flex;
+           align-items: center;
+           margin-left: 0.6rem;
+          .mat-icon {
+              vertical-align: middle;
+              padding-right: 0.2rem;
+          }
+      }
+  
+      .header_separator {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        flex-grow: 1; 
+        text-align: center;
+      }
+  
+      .header_menu {
+          flex-grow: 4;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+  
+          .header_button {
+              margin-left: 1em;
+              margin-right: 1em;
+              font-size: 16px;
+  
+              a {
+                font-weight: normal;
+                text-decoration: none;
+                cursor: pointer;
+                color: rgb(7, 6, 6);
+              }
+  
+              a:hover {
+                color: rgb(254, 240, 193);
+              }
+  
+              a.active {
+                font-weight: normal;
+                text-decoration: underline;
+                color: lightyellow;
+              }
+  
+          }
+      }
+  
+      .header_login {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+        font-size: 16px;
+        color: black;
+        cursor: pointer;
+        .mat-icon {
+            vertical-align: middle;
+            padding-right: 0.2rem;
+            color: black;
+        }
+
+        &:hover {
+            text-decoration: underline; // Añadimos subrayado en hover para cuando pasemos por encima del login
+          }
+    }
+  }
