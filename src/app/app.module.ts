@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { CategoryModule } from './category/category.module';
+import { AuthorModule } from './author/author.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { CategoryModule } from './category/category.module';
     AppRoutingModule,
     CoreModule,
     CategoryModule,
+    AuthorModule,
     BrowserAnimationsModule
   ],
   providers: [],

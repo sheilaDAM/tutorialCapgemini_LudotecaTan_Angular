@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { CategoryListComponent } from './category-list/category-list.component';
-import { CategoryEditComponent } from './category-edit/category-edit.component';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { AuthorListComponent } from './author-list/author-list.component';
+import { AuthorEditComponent } from './author-edit/author-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 
 @NgModule({
   declarations: [
-    CategoryListComponent,
-    CategoryEditComponent
+    AuthorListComponent,
+    AuthorEditComponent
   ],
   imports: [
     CommonModule,
@@ -27,13 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    MatPaginatorModule,
   ],
   providers: [
     {
-      provide: MAT_DIALOG_DATA,
-      useValue: {},
+        provide: MAT_DIALOG_DATA,
+        useValue: {},
     },
-  ]
+]
 })
-export class CategoryModule { }
+export class AuthorModule { }

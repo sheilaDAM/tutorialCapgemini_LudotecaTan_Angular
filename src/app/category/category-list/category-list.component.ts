@@ -12,6 +12,7 @@ import { DialogConfirmationComponent } from 'src/app/core/dialog-confirmation/di
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss']
 })
+
 export class CategoryListComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Category>();
