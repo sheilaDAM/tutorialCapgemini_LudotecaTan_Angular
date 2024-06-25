@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    width: 325px;
+    margin-bottom: 10px;
+
+    mat-card {
+        width: 100%;
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;  
+
+        .photo {
+            margin-right: 10px;
+
+            img {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
+
+        .detail {
+
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+            .title {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px; 
+            }
+
+            .properties {
+                font-size: 11px;
+
+                div {
+                    height: 15px;
+                    margin-bottom: 2px;
+                }                
+            }
+        }
+    }
+}    
