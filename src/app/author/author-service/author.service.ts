@@ -4,8 +4,10 @@ import { Observable, of } from 'rxjs';
 import { Pageable } from 'src/app/core/model/page/Pageable';
 import { Author } from '../model/Author';
 import { AuthorPage } from '../model/AuthorPage';
-import { AUTHOR_DATA } from '../model/mock-authors';
-import { core } from '@angular/compiler';
+//import { AUTHOR_DATA } from '../model/mock-authors';
+//import { core } from '@angular/compiler';
+import { AUTHOR_DATA_LIST } from '../model/mock-authors-list';
+
 
 @Injectable({
     providedIn: 'root'
@@ -33,5 +35,9 @@ export class AuthorService {
     deleteAuthor(idAuthor: number): Observable<void> {
         //return of(null);
         return this.http.delete<void>(this.apiUrl + '/' + idAuthor);
+    }
+
+    getAllAuthors(): Observable<Author[]> {
+        return of(AUTHOR_DATA_LIST);
     }
 }
