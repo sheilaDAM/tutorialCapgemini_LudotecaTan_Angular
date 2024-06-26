@@ -26,7 +26,7 @@ export class ClientListComponent implements OnInit {
     );
   }
 
-  createCategory() {    
+  createClient() {    
     const dialogRef = this.dialog.open(ClientEditComponent, {
       data: {}
     });
@@ -36,7 +36,7 @@ export class ClientListComponent implements OnInit {
     });    
   }  
 
-  editCategory(client: Client) {
+  editClient(client: Client) {
     const dialogRef = this.dialog.open(ClientEditComponent, {
       data: { client: client }
     });
@@ -48,7 +48,7 @@ export class ClientListComponent implements OnInit {
 
   deleteClient(client: Client) {    
     const dialogRef = this.dialog.open(DialogConfirmationComponent, {
-      data: { title: "Eliminar cliente/a", description: "Atención si borra el/la cliente/a se perderán sus datos.<br> ¿Desea eliminar el/la cliente/a?" }
+      data: { title: "Eliminar cliente", description: "Atención si borra el cliente se perderán sus datos.<br> ¿Desea eliminar el cliente?" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
