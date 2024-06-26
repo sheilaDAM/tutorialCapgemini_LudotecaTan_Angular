@@ -6,7 +6,7 @@ import { Author } from '../model/Author';
 import { AuthorPage } from '../model/AuthorPage';
 //import { AUTHOR_DATA } from '../model/mock-authors';
 //import { core } from '@angular/compiler';
-import { AUTHOR_DATA_LIST } from '../model/mock-authors-list';
+//import { AUTHOR_DATA_LIST } from '../model/mock-authors-list';
 
 
 @Injectable({
@@ -22,7 +22,7 @@ export class AuthorService {
 
     getAuthors(pageable: Pageable): Observable<AuthorPage> {
         //return of(AUTHOR_DATA);
-        return this.http.post<AuthorPage>(this.apiUrl, {pageable:pageable});
+        return this.http.post<AuthorPage>(this.apiUrl, { pageable: pageable });
     }
 
     saveAuthor(author: Author): Observable<void> {
@@ -38,6 +38,7 @@ export class AuthorService {
     }
 
     getAllAuthors(): Observable<Author[]> {
-        return of(AUTHOR_DATA_LIST);
+        //return of(AUTHOR_DATA_LIST);
+        return this.http.get<Author[]>(this.apiUrl);
     }
 }
