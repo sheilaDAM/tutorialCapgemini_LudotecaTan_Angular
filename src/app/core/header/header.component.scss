@@ -45,11 +45,11 @@
                 color: rgb(7, 6, 6);
               }
   
-              a:hover {
+              &:hover {
                 color: rgb(254, 240, 193);
               }
   
-              a.active {
+              &.active {
                 font-weight: normal;
                 text-decoration: underline;
                 color: lightyellow;

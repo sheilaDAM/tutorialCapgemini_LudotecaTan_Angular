@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Game } from '../model/Game';
 //import { GAME_DATA } from '../model/mock-games';
 import { HttpClient } from '@angular/common/http';
+import { Pageable } from 'src/app/core/model/page/Pageable';
 
 @Injectable({
   providedIn: 'root'

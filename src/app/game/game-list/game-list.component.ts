@@ -7,14 +7,14 @@ import { GameService } from '../game-service/game.service';
 import { Game } from '../model/Game';
 
 @Component({
-  selector: 'app-game-list',
-  templateUrl: './game-list.component.html',
-  styleUrls: ['./game-list.component.scss']
+    selector: 'app-game-list',
+    templateUrl: './game-list.component.html',
+    styleUrls: ['./game-list.component.scss']
 })
 
 export class GameListComponent implements OnInit {
 
-  categories : Category[];
+    categories: Category[];
     games: Game[];
     filterCategory: Category;
     filterTitle: string;
@@ -53,15 +53,15 @@ export class GameListComponent implements OnInit {
         );
     }
 
-    createGame() {    
+    createGame() {
         const dialogRef = this.dialog.open(GameEditComponent, {
             data: {}
         });
 
         dialogRef.afterClosed().subscribe(result => {
             this.ngOnInit();
-        });    
-    }  
+        });
+    }
 
     editGame(game: Game) {
         const dialogRef = this.dialog.open(GameEditComponent, {
