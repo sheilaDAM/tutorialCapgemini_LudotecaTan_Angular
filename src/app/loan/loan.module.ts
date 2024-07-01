@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 
-
 @NgModule({
   declarations: [
     LoanListComponent,

@@ -12,19 +12,19 @@
             <mat-cell *matCellDef="let element"> {{element.game.title}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="clientNname">
+        <ng-container matColumnDef="clientName">
             <mat-header-cell *matHeaderCellDef> Nombre del cliente  </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.client.name}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="startLoanDate">
             <mat-header-cell *matHeaderCellDef> Fecha de préstamo  </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.startLoanDate | Date}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.startLoanDate |  date: 'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="endLoanDate">
             <mat-header-cell *matHeaderCellDef> Fecha de devolución  </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.endLoanDate | Date}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.endLoanDate |  date: 'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="action">
