@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { Pageable } from 'src/app/core/model/page/Pageable';
 import { LoanPage } from '../model/LoanPage';
 import { Loan } from '../model/Loan';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,19 @@ export class LoanService {
 
   saveLoan(loan: Loan): Observable<Loan> {
     const url = loan.id ? `${this.apiUrl}/${loan.id}` : this.apiUrl;
-    return this.http.put<Loan>(url, loan);
+    return this.http.put<Loan>(url, loan); //.pipe(catchError(this.handleError));
   }
+  /*
+    private handleError(error: HttpErrorResponse): Observable<never> {
+  
+      if (error.status === 400) {
+        return throwError(() => new Error('El nombre del cliente ya existe, por favor inserte otro.')); //throwError(error) is deprecated, now --> throwError(() => new Error('error')
+  
+      } else {
+        return throwError(() => new Error('Hubo un error :('));
+      }
+    }
+      */
 
   deleteLoan(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);

@@ -1,0 +1,44 @@
+.container {
+    min-width: 350px;
+    max-width: 500px;
+    padding: 20px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        text-align: right;
+
+        button {
+            margin-left: 10px;
+        }
+    }
+
+    .error-snackbar {
+        background-color: #f44336;
+        color: #fff;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .error-field {
+        border-color: #f44336;  /* Color rojo para el borde */
+    }
+
+    .mat-form-field-underline .error-field {
+        background-color: #f44336; /* Color rojo para la línea de subrayado */
+    }
+
+    .mat-form-field-ripple .error-field {
+        background-color: #f44336;   /* Color rojo para la línea de subrayado animada */
+    }
+
+}

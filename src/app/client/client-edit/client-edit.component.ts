@@ -1,8 +1,7 @@
-import { Component, ErrorHandler, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Client } from '../model/Client';
 import { ClientService } from '../client-service/client.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-client-edit',
@@ -33,7 +32,6 @@ export class ClientEditComponent implements OnInit {
   }
 
   onSave() {
-
     //Para poder mostrar el mensaje de error si no hemos insertado nombre y está vacío
     if (this.client.name.trim() === '') {
       (error) => this.errorMessage = error.message

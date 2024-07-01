@@ -9,6 +9,10 @@ import { AuthorModule } from './author/author.module';
 import { GameModule } from './game/game.module';
 import { ClientModule } from './client/client.module';
 import { LoanModule } from './loan/loan.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 @NgModule({
   declarations: [
@@ -24,6 +28,9 @@ import { LoanModule } from './loan/loan.module';
     ClientModule,
     LoanModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatSnackBarModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

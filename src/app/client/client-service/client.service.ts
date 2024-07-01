@@ -26,9 +26,7 @@ export class ClientService {
     //return this.http.put<Client>(this.apiUrl, client);
 
     const url = client.id ? `${this.apiUrl}/${client.id}` : this.apiUrl;
-    return this.http.put<Client>(url, client).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.put<Client>(url, client).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
