@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Pageable } from 'src/app/core/model/page/Pageable';
 import { LoanPage } from '../model/LoanPage';
 import { Loan } from '../model/Loan';
-import { catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,21 @@ export class LoanService {
 
   saveLoan(loan: Loan): Observable<Loan> {
     const url = loan.id ? `${this.apiUrl}/${loan.id}` : this.apiUrl;
-    return this.http.put<Loan>(url, loan); //.pipe(catchError(this.handleError));
+    return this.http.put<Loan>(url, loan).pipe(
+      catchError(this.handleError)
+    );
   }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${error.error.message}`;
+    } else {
+      errorMessage = error.error || 'Something went wrong';
+    }
+    return throwError(() => new Error(errorMessage));
+  }
+
   /*
     private handleError(error: HttpErrorResponse): Observable<never> {
   

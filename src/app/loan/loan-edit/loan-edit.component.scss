@@ -29,16 +29,17 @@
         text-align: center;
     }
 
-    .error-field {
-        border-color: #f44336;  /* Color rojo para el borde */
+    .error-field .mat-form-field-underline {
+        background-color: #f44336 !important;
     }
 
-    .mat-form-field-underline .error-field {
-        background-color: #f44336; /* Color rojo para la línea de subrayado */
+    .error-field .mat-form-field-label {
+        color: #f44336 !important;
     }
 
-    .mat-form-field-ripple .error-field {
-        background-color: #f44336;   /* Color rojo para la línea de subrayado animada */
+    .error-field .mat-input-element {
+        border-color: #f44336 !important;
     }
+
 
 }

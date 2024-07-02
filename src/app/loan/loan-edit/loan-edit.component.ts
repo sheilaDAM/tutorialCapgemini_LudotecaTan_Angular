@@ -21,6 +21,7 @@ export class LoanEditComponent implements OnInit {
   clients: Client[];
   games: Game[];
   errorMessage: string;
+  endLoanDateError: string;
 
   constructor(
     public dialogRef: MatDialogRef<LoanEditComponent>,
@@ -49,8 +50,8 @@ export class LoanEditComponent implements OnInit {
 
   onSave(): void {
 
-     // Validación: campos obligatorios
-     if (!this.loan.client || !this.loan.game || !this.loan.startLoanDate || !this.loan.endLoanDate) {
+    // Validación: campos obligatorios
+    if (!this.loan.client || !this.loan.game || !this.loan.startLoanDate || !this.loan.endLoanDate) {
       this.errorMessage = "Todos los campos son obligatorios.";
       this.snackBar.open(this.errorMessage, 'Cerrar', {
         duration: 5000,
@@ -69,6 +70,7 @@ export class LoanEditComponent implements OnInit {
         verticalPosition: 'top'
       });
       return;
+
       /*
       alert("La fecha de fin no puede ser anterior a la fecha de inicio.");
       return;
