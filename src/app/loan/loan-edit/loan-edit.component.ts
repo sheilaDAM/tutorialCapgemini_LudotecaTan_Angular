@@ -69,7 +69,7 @@ export class LoanEditComponent implements OnInit {
       this.errorMessage = "La fecha de devolución no puede ser anterior a la fecha de préstamo.";
       this.showSnackBar(this.errorMessage, 'error-snackbar');
       return;
-    
+
 
       /*
       alert("La fecha de fin no puede ser anterior a la fecha de inicio.");
@@ -93,66 +93,68 @@ export class LoanEditComponent implements OnInit {
       */
 
     // Crear una nueva instancia de Loan con las fechas formateadas
-  const formattedLoan = {
-    ...this.loan,
-    startLoanDate: startDate,
-    endLoanDate: endDate
-  };
+    const formattedLoan: Loan = {
+      ...this.loan,
+      startLoanDate: new Date(startDate),
+      endLoanDate: new Date(endDate)
+    };
 
-    this.loanService.saveLoan(formattedLoan as any).subscribe({
+    this.loanService.saveLoan(formattedLoan).subscribe({
       next: () => {
         this.dialogRef.close();
         const dialogRef = this.dialog.open(DialogSuccessComponent, {
           data: { title: "Operación de guardado", description: "Préstamo guardado con éxito :)" }
         });
-  
+
       },
       error: (error) => {
-        console.error('Error:', error);
-        if (error.status === 409) {
-          this.errorMessage = error.error //"El cliente ya tiene más de 2 préstamos en el rango de fechas.";
-        } else {
-          this.errorMessage = error.error;
-        }
+        console.error('Error:', error);  // Ver el error completo en la consola
+
+        let errorMessage = error.message || "Error desconocido";
+
+        // Formatear fechas en el mensaje de error si es necesario
+        const startFormatted = this.formatDate(this.loan.startLoanDate, 'dd-MM-yyyy');
+        const endFormatted = this.formatDate(this.loan.endLoanDate, 'dd-MM-yyyy');
+        errorMessage = errorMessage.replace(this.formatDate(this.loan.startLoanDate), startFormatted);
+        errorMessage = errorMessage.replace(this.formatDate(this.loan.endLoanDate), endFormatted);
+
+        this.errorMessage = errorMessage;
+
+        // Asignamos el mensaje de error a this.errorMessage
+        this.errorMessage = errorMessage;
+
+        // Mostramos el snackbar con el mensaje de error
         this.showSnackBar(this.errorMessage, 'error-snackbar');
       }
     });
-  
-  }
 
-  /*
-  next: () => this.dialogRef.close(),
-  error: (error) => {
-    alert(error.message);
   }
-});
-*/
-
-  /*
-  this.loanService.saveLoan(this.loan).subscribe(() => {
-    this.dialogRef.close();
-  });
-}
-  */
 
   onClose(): void {
     this.dialogRef.close();
   }
 
   // Función para formatear las fechas al formato 'yyyy-MM-dd' (el que tiene el back)
-  private formatDate(date: Date): string {
+  private formatDate(date: Date, format: string = 'yyyy-MM-dd'): string {
     const d = new Date(date);
     const month = '' + (d.getMonth() + 1);
     const day = '' + d.getDate();
     const year = d.getFullYear();
 
-    return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
+    //formato para mostrar en la interfaz de usuario
+    if (format === 'dd-MM-yyyy') {
+      return [day, month, year].join('-');
+    }
+
+    return [year, month, day].join('-');
+
+    // return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
   }
 
   // Función para mostrar el snackBar de error 
   private showSnackBar(message: string, panelClass: string): void {
     this.snackBar.open(message, 'Cerrar', {
-     // duration: 7000,
+      // duration: 7000,
       panelClass: [panelClass],
       verticalPosition: 'top'
     });
