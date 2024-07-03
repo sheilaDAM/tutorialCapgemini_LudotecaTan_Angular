@@ -17,10 +17,6 @@
         }
     }
 
-    .error-snackbar {
-        background-color: #f44336;
-        color: #fff;
-    }
 
     .error-message {
         color: red;
@@ -28,6 +24,7 @@
         margin-bottom: 20px;
         text-align: center;
     }
+        
 
     .error-field .mat-form-field-underline {
         background-color: #f44336 !important;

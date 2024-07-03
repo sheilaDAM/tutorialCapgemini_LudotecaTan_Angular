@@ -8,11 +8,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { DialogConfirmationComponent } from './dialog-confirmation/dialog-confirmation.component';
+import { DialogSuccessComponent } from './dialog-success/dialog-success.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, DialogConfirmationComponent],
+  declarations: [HeaderComponent, DialogConfirmationComponent, DialogSuccessComponent],
   imports: [
     CommonModule,
     RouterModule,

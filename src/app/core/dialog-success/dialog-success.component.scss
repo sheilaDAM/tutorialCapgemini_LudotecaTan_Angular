@@ -1,0 +1,27 @@
+.container {
+    min-width: 350px;
+    max-width: 500px;
+    padding: 20px;
+
+    .description {
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      text-align: right;
+
+      button {
+          margin-left: 10px;
+      }
+    }
+
+    .close-button {
+        background-color: transparent; /* Fondo transparente */
+        color: #4caf50; /* Texto verde */
+        border: 2px solid #4caf50; /* Borde verde */
+        &:hover {
+          background-color: rgba(76, 175, 80, 0.1); /* Fondo verde claro al pasar el cursor */
+        }
+      }
+      
+}   
