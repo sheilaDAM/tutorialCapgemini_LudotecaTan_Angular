@@ -146,9 +146,7 @@ export class LoanEditComponent implements OnInit {
       return [day, month, year].join('-');
     }
 
-    return [year, month, day].join('-');
-
-    // return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
+    return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
   }
 
   // Función para mostrar el snackBar de error 

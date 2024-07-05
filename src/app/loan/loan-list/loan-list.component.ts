@@ -29,10 +29,19 @@ export class LoanListComponent implements OnInit {
 
   //Añadimos los filtros
   //filterGame: string = '';
+  /*
+  //Si no añadimos opción en blanco con "-" utilizaríamos este código
   filterGame: Game;
   filterClient: Client;
   filterStartDate: Date;
   filterEndDate: Date;
+  */
+  //Para añadir opción en blanco, si en vez de limpiar los filtros queremos dejar en blanco alguno, poder tener ambas opciones
+  //Estas propiedades almacena el objeto seleccionado en el combo desplegable para filtrar los préstamos. Si ningún elemento de las opciones está seleccionado (- o no se elige), su valor es null.
+  filterGame: Game | null = null;
+  filterClient: Client | null = null;
+  filterStartDate: Date | null = null;
+  filterEndDate: Date | null = null;
 
   dataSource = new MatTableDataSource<Loan>();
   displayedColumns: string[] = ['id', 'gameName', 'clientName', 'startLoanDate', 'endLoanDate', 'action'];
@@ -67,7 +76,6 @@ export class LoanListComponent implements OnInit {
     let pageable: Pageable = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-
       sort: [{
         property: 'startLoanDate',
         direction: 'ASC'
@@ -148,6 +156,7 @@ export class LoanListComponent implements OnInit {
   }
 
   onSearch() {
+    this.pageNumber = 0; // Reseteamos a la primera página cuando se hace una nueva búsqueda, sino, no sirven los filtros en páginas diferentes a la primera
     this.loadPage();
   }
 

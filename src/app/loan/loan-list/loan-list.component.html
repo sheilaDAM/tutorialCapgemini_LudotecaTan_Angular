@@ -8,6 +8,7 @@
             <mat-form-field>
                 <mat-label>Título juego</mat-label>
                 <mat-select [(ngModel)]="filterGame" name="game">
+                    <mat-option value="">-</mat-option>
                     <mat-option *ngFor="let game of games" [value]="game">{{ game.title }}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -21,6 +22,7 @@
             <mat-form-field>
                 <mat-label>Cliente</mat-label>
                 <mat-select disableRipple [(ngModel)]="filterClient" name="client">
+                    <mat-option value="">-</mat-option>
                     <mat-option *ngFor="let client of clients" [value]="client">{{client.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
