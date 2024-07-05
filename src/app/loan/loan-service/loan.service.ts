@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Pageable } from 'src/app/core/model/page/Pageable';
@@ -16,10 +16,54 @@ export class LoanService {
 
   constructor(private http: HttpClient) { }
 
+  getLoans(pageable: Pageable, filters: any): Observable<LoanPage> {
+    const payload = {
+      pageable: pageable,
+      ...filters
+    };
 
-  getLoans(pageable: Pageable): Observable<LoanPage> {
-    return this.http.post<LoanPage>(this.apiUrl, { pageable: pageable });
+    return this.http.post<LoanPage>(this.apiUrl + "/page", payload).pipe(
+      catchError(this.handleError)
+    );
   }
+
+/*  
+  getLoans(pageable: Pageable, gameTitle?: string, clientId?: number, startDate?: Date, endDate?: Date): Observable<LoanPage> {
+    let params = new HttpParams();
+    params = params.append('page', pageable.pageNumber.toString());
+    params = params.append('size', pageable.pageSize.toString());
+    params = params.append('sort', pageable.sort.map(s => `${s.property},${s.direction}`).join(','));
+
+    if (gameTitle) {
+      params = params.append('gameTitle', gameTitle);
+    }
+    if (clientId) {
+      params = params.append('clientId', clientId.toString());
+    }
+    if (startDate) {
+      params = params.append('startDate', startDate.toISOString().split('T')[0]);
+    }
+    if (endDate) {
+      params = params.append('endDate', endDate.toISOString().split('T')[0]);
+    }
+
+    return this.http.get<LoanPage>(this.apiUrl, { params }); //.pipe(catchError(this.handleError));
+  }
+  */ 
+
+  /*
+  getLoans(pageable: Pageable): Observable<LoanPage> {
+    return this.http.post<LoanPage>(this.apiUrl + '/page', pageable)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+*/
+  /*
+    getLoans(pageable: Pageable): Observable<LoanPage> {
+      return this.http.post<LoanPage>(this.apiUrl, { pageable: pageable });
+    }
+  */
 
   getAllLoans(): Observable<Loan[]> {
     return this.http.get<Loan[]>(this.apiUrl);

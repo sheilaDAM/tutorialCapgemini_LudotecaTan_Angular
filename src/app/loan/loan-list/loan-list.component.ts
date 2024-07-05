@@ -9,6 +9,8 @@ import { LoanService } from '../loan-service/loan.service';
 import { LoanEditComponent } from '../loan-edit/loan-edit.component';
 import { Client } from 'src/app/client/model/Client';
 import { Game } from 'src/app/game/model/Game';
+import { GameService } from 'src/app/game/game-service/game.service';
+import { ClientService } from 'src/app/client/client-service/client.service';
 
 @Component({
   selector: 'app-loan-list',
@@ -25,16 +27,39 @@ export class LoanListComponent implements OnInit {
   pageSize: number = 5;
   totalElements: number = 0;
 
+  //Añadimos los filtros
+  //filterGame: string = '';
+  filterGame: Game;
+  filterClient: Client;
+  filterStartDate: Date;
+  filterEndDate: Date;
+
   dataSource = new MatTableDataSource<Loan>();
   displayedColumns: string[] = ['id', 'gameName', 'clientName', 'startLoanDate', 'endLoanDate', 'action'];
 
   constructor(
     private loanService: LoanService,
+    private gameService: GameService,
+    private clientService: ClientService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.loadPage();
+    this.loadGames();
+    this.loadClients();
+  }
+
+  loadGames() {
+    this.gameService.getGames().subscribe(games => {
+      this.games = games;
+    });
+  }
+
+  loadClients() {
+    this.clientService.getClients().subscribe(clients => {
+      this.clients = clients;
+    });
   }
 
   loadPage(event?: PageEvent) {
@@ -44,9 +69,18 @@ export class LoanListComponent implements OnInit {
       pageSize: this.pageSize,
 
       sort: [{
+        property: 'startLoanDate',
+        direction: 'ASC'
+      }, {
         property: 'id',
         direction: 'ASC'
       }]
+/*
+      sort: [{
+        property: 'id',
+        direction: 'ASC'
+      }]
+*/
     }
 
     if (event != null) {
@@ -54,6 +88,21 @@ export class LoanListComponent implements OnInit {
       pageable.pageNumber = event.pageIndex;
     }
 
+    const filters = {
+      gameTitle: this.filterGame ? this.filterGame.title : null,
+      clientId: this.filterClient ? this.filterClient.id : null,
+      startDate: this.filterStartDate ? this.formatDate(this.filterStartDate, 'yyyy-MM-dd') : null,
+      endDate: this.filterEndDate ? this.formatDate(this.filterEndDate, 'yyyy-MM-dd') : null,
+    };
+
+    this.loanService.getLoans(pageable, filters).subscribe(data => {
+      this.dataSource.data = data.content;
+      this.pageNumber = data.pageable.pageNumber;
+      this.pageSize = data.pageable.pageSize;
+      this.totalElements = data.totalElements;
+    });
+
+    /*
     this.loanService.getLoans(pageable).subscribe(data => {
       console.log(data);
       this.dataSource.data = data.content;
@@ -62,7 +111,9 @@ export class LoanListComponent implements OnInit {
       this.totalElements = data.totalElements;
       
     });
+    */
   }
+
 
   createLoan() {
     const dialogRef = this.dialog.open(LoanEditComponent, {
@@ -88,5 +139,25 @@ export class LoanListComponent implements OnInit {
     });
   }
 
+  onCleanFilter() {
+    this.filterGame = null;
+    this.filterClient = null;
+    this.filterStartDate = null;
+    this.filterEndDate = null;
+    this.loadPage();
+  }
 
+  onSearch() {
+    this.loadPage();
+  }
+
+  private formatDate(date: Date, format: string = 'yyyy-MM-dd'): string {
+    const d = new Date(date);
+    const month = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    const year = d.getFullYear();
+  
+    return [year, month, day].join('-');
+  }
+  
 }

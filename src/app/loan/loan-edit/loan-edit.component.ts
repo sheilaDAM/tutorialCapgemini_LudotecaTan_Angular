@@ -57,7 +57,7 @@ export class LoanEditComponent implements OnInit {
     const endDate = this.formatDate(this.loan.endLoanDate);
 
 
-    // Validación de campos obligatorios- (en este caso, todos)
+    // Validación de campos obligatorios (en este caso, todos)
     if (!this.loan.client || !this.loan.game || !startDate || !endDate) {
       this.errorMessage = "Todos los campos son obligatorios.";
       this.showSnackBar(this.errorMessage, 'error-snackbar');
@@ -92,7 +92,7 @@ export class LoanEditComponent implements OnInit {
     }
       */
 
-    // Crear una nueva instancia de Loan con las fechas formateadas
+    // Creamos una nueva instancia de Loan para usar las fechas formateadas
     const formattedLoan: Loan = {
       ...this.loan,
       startLoanDate: new Date(startDate),
@@ -112,7 +112,7 @@ export class LoanEditComponent implements OnInit {
 
         let errorMessage = error.message || "Error desconocido";
 
-        // Formatear fechas en el mensaje de error si es necesario
+        // Formateamos las fechas en el mensaje de error
         const startFormatted = this.formatDate(this.loan.startLoanDate, 'dd-MM-yyyy');
         const endFormatted = this.formatDate(this.loan.endLoanDate, 'dd-MM-yyyy');
         errorMessage = errorMessage.replace(this.formatDate(this.loan.startLoanDate), startFormatted);
